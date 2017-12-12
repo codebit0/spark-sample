@@ -18,7 +18,6 @@ public class PairRDDCombineExample {
 			JavaRDD<String> lines = sc.parallelize(Arrays.asList(csv.split("\\n")));
 			JavaPairRDD<String,Integer> nums = lines.mapToPair(s-> new Tuple2<String, Integer>(s.split(" ")[0], 1));
 			
-			
 		}
 	}
 }
