@@ -14,7 +14,7 @@ import scala.Tuple2;
 public class WorkCount {
 
 	public static void main(String[] args) {
-		try(JavaSparkContext sc = SampleConfig.context()){
+		try(JavaSparkContext sc = Sample.context()){
 //			JavaRDD<String> textFile = sc.textFile("hdfs://...");
 			//JavaRDD<String> textFile = sc.textFile("http://archive.ics.uci.edu/ml/machine-learning-databases/00398/dataset-CalheirosMoroRita-2017.csv");
 			

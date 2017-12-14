@@ -11,7 +11,7 @@ import scala.Tuple2;
 
 public class PairRDDCombineExample {
 	public static void main(String[] args) {
-		try(JavaSparkContext sc = SampleConfig.context()){
+		try(JavaSparkContext sc = Sample.context()){
 			
 			//다운로드 파일 JavaPairRDD
 			String csv = scala.io.Source.fromURL("http://archive.ics.uci.edu/ml/machine-learning-databases/00398/dataset-CalheirosMoroRita-2017.csv", scala.io.Codec.ISO8859()).mkString();

@@ -15,7 +15,7 @@ import org.apache.spark.rdd.RDD;
 
 public class NormalizerSample {
 	public static void main(String[] args) {
-		try(JavaSparkContext sc = SampleConfig.context()){
+		try(JavaSparkContext sc = Sample.context()){
 			
 			Vector vector1 = Vectors.dense(new double[]{-2.0, 5.0, 1.0});
 			Vector vector2 = Vectors.dense(new double[]{2.0, 0.0, 1.0});
