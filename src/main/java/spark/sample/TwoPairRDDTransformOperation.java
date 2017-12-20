@@ -2,7 +2,6 @@ package spark.sample;
 
 
 import java.util.Arrays;
-
 import static spark.sample.Sample.*;
 
 import org.apache.spark.api.java.JavaPairRDD;
@@ -12,7 +11,7 @@ import org.apache.spark.api.java.JavaSparkContext;
 import scala.Tuple2;
 
 
-public class PairRDDTransformOperation {
+public class TwoPairRDDTransformOperation {
 
 	public static void main(String[] args) {
 		try(JavaSparkContext sc = context()){
@@ -46,20 +45,9 @@ public class PairRDDTransformOperation {
 			JavaPairRDD<String,Iterable<String>> groupByKey = pairs.groupByKey();
 			debug("groupByKey", groupByKey);
 			
-			//키의 변경없이 value만 변경 - value에 -- 를 덧붙임 
+			//키의 변경없이 value만 변경 
 			JavaPairRDD<String, String> mapValues = pairs.mapValues(v->"--"+v);
 			debug("mapValues", mapValues);
-			
-			//------- 
-			//pair rdd -> pair rdd  지만 flat하게 변환 
-			JavaPairRDD<String,String> flatMapValues = groupByKey.flatMapValues(l->l);
-			debug("flatMapValues", flatMapValues);
-			
-			//pair rdd -> rdd 로 변환 
-			JavaRDD<String> flatMap = groupByKey.flatMap(t -> t._2().iterator());
-			debug("flatMap", flatMap);
-			
-			flatMapValues.join(keyJoinValue);
 			
 			
 		}

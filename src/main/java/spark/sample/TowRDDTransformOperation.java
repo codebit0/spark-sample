@@ -15,7 +15,7 @@ public class TowRDDTransformOperation {
 
 	public static void main(String[] args) {
 		try(JavaSparkContext sc = context()){
-			
+			//List 형 RDD
 			List<Integer> data1 = Arrays.asList(1, 2, 3, 4, 5);
 			List<Integer> data2 = Arrays.asList(3, 4, 5, 6, 7);
 			List<Integer> data3 = Arrays.asList(6, 7, 8, 9, 10);
@@ -37,6 +37,7 @@ public class TowRDDTransformOperation {
 			//카테시안 곱 
 			JavaPairRDD<Integer, Integer> cartesian = union.cartesian(d3);
 			debug("cartesian", cartesian);
+			
 		}
 	}
 }
