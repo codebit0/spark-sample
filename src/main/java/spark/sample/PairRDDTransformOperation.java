@@ -2,12 +2,14 @@ package spark.sample;
 
 
 import java.util.Arrays;
+import java.util.function.Function;
 
 import static spark.sample.Sample.*;
 
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.api.java.function.Function2;
 
 import scala.Tuple2;
 
@@ -58,10 +60,40 @@ public class PairRDDTransformOperation {
 			//pair rdd -> rdd 로 변환 
 			JavaRDD<String> flatMap = groupByKey.flatMap(t -> t._2().iterator());
 			debug("flatMap", flatMap);
+
+			//filter
+			JavaPairRDD<String,String> filter = pairs.filter(t->t._1.contains("c"));
+			debug("filter", filter);
 			
-			flatMapValues.join(keyJoinValue);
+			Function<String, Tuple2<String, Integer>> createAcc = new Function<String, Tuple2<String, Integer>>() {
+				@Override
+				public Tuple2<String, Integer> apply(String t) {
+					
+					return new Tuple2<String, Integer>(t, 0);
+				}
+			};
 			
+			Function2<Tuple2<String, Integer>, Integer, Tuple2<String, Integer>> addAndCount = new Function2<Tuple2<String, Integer>, Integer, Tuple2<String, Integer>>() {
+
+				@Override
+				public Tuple2<String, Integer> call(Tuple2<String, Integer> v1, Integer v2) throws Exception {
+					// TODO Auto-generated method stub
+					Tuple2 r = new Tuple2(v1._1, v1._2 +1);
+					return r;
+				}
+			};
 			
+			Function2<Tuple2<String, Integer>, Tuple2<String, Integer>, Tuple2<String, Integer>> combine = new Function2<Tuple2<String, Integer>, Tuple2<String, Integer>, Tuple2<String, Integer>>() {
+
+				@Override
+				public Tuple2<String, Integer> call(Tuple2<String, Integer> v1, Tuple2<String, Integer> v2)
+						throws Exception {
+					return new Tuple2(v1._1, v1._2 + v2._2);
+				}
+			};
+			
+			//flatMapValues.combineByKey(createAcc, addAndCount, combine);
+			 
 		}
 	}
 }

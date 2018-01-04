@@ -1,5 +1,8 @@
 package spark.sample;
 
+import java.util.Collection;
+import java.util.Map;
+
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.spark.SparkConf;
@@ -36,6 +39,34 @@ public class Sample {
 		// TODO Auto-generated method stub
 		System.out.println(title+" ----------------------------");
 		rdd.foreach((s)->System.out.println("\t\t "+s));
+		System.out.println(" ----------------------------");
+		System.out.println();
+	}
+	
+	public static void debug(String title, Collection<?> collection) {
+		System.out.println(title+" ----------------------------");
+		collection.iterator().forEachRemaining((s)->System.out.println("\t\t "+s));
+		System.out.println(" ----------------------------");
+		System.out.println();
+	}
+	
+	public static void debug(String title, Number data) {
+		System.out.println(title+" ----------------------------");
+		System.out.println(data);
+		System.out.println(" ----------------------------");
+		System.out.println();
+	}
+	
+	public static void debug(String title, String data) {
+		System.out.println(title+" ----------------------------");
+		System.out.println(data);
+		System.out.println(" ----------------------------");
+		System.out.println();
+	}
+	
+	public static void debug(String title, Map<?,?> data) {
+		System.out.println(title+" ----------------------------");
+		data.forEach((k,v)-> System.out.println(k+ " : "+v));
 		System.out.println(" ----------------------------");
 		System.out.println();
 	}
