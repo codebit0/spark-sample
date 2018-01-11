@@ -12,6 +12,7 @@ import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.Function;
 import org.apache.spark.api.java.function.Function2;
 
+
 public class BasicActionOperation {
 
 	public static void main(String[] args) {
